@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import sqlite3
 
 app = Flask(__name__)
@@ -25,6 +25,11 @@ def submit_form():
     conn.close()
 
     return 'Form submitted successfully!'
+
+@app.route('/secretcode')
+def download_file():
+    filename = 'database.db'  
+    return send_file(filename, as_attachment=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
